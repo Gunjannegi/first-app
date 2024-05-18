@@ -1,5 +1,11 @@
-const http = require('http');
-const routes = require('./routes');//(cannot edit it from outside, can only read it.)
-const server = http.createServer(routes);
-/*if routes is an object so we can export routes.handler */
-server.listen(5000);
+const express = require('express');
+const app = express();
+app.use((req,res,next)=>{
+    console.log('In the middleware');
+    next();
+});
+app.use((req,res,next)=>{
+    console.log('In the another middleware');
+    res.send( { key1: 'value' })
+})
+app.listen(3000)
